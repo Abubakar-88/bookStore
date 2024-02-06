@@ -9,7 +9,9 @@ import java.util.Date;
 @Entity
 @Table(name = "book", catalog = "bookstoredb", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
 @NamedQueries({
+        @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
         @NamedQuery(name = "Book.countAll", query = "SELECT COUNT(*) FROM Book b"),
+        @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title"),
         @NamedQuery(name = "Book.countByCategory", query = "SELECT COUNT(b) FROM Book b "
                 + "WHERE b.category.categoryId = :catId"),
 })
@@ -37,7 +39,10 @@ public class Book {
     @Column(name = "image", nullable = false)
     private byte[] image;
 
+
+    @Column(name = "base64Image")
     private String base64Image;
+
     @Column(name = "price", nullable = false, precision = 12, scale = 0)
     private  float price;
     @Column(name = "publish_date", nullable = false, length = 10)

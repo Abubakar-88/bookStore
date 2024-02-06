@@ -6,7 +6,7 @@
     <img src="./images/BookstoreAdminLogo.png" />
     </div>
     <div>
-		Welcome, <c:out value="${sessionScope.userfullName}" /> | <a href="logout">Logout</a>
+		Welcome, <c:out value="${sessionScope.useremail}" /> | <a href="logout">Logout</a>
 		<br/><br/>
 	</div>
 

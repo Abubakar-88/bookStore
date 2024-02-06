@@ -111,7 +111,7 @@ public void deleteUser() throws ServletException, IOException {
 
         if(loginResult){
             request.getSession().setAttribute("useremail", email);
-            request.getSession().setAttribute("", fullName);
+            request.getSession().setAttribute("fullName", fullName);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/");
             dispatcher.forward(request, response);
