@@ -114,31 +114,48 @@
 	</div>
 
 
+<head>
+
+
+    <script>
+
+    </script>
+</head>
+
+
+
 </body>
-<script type="text/javascript">
+<script >
+     $(document).ready(function() {
 
-	$(document).ready(function() {
-		$('#description').richText();
+	$('#description').richText();
 
-		$('#bookImage').change(function() {
-			showImageThumbnail(this);
-		});
+       // Event handler for file input change
+               $('#bookImage').change(function() {
+                   previewImage(this);
+               });
 
-		$("#buttonCancel").click(function() {
-			history.go(-1);
-		});
-	});
+     		$("#buttonCancel").click(function() {
+     			history.go(-1);
+     		});
 
-	function showImageThumbnail(fileInput) {
-		var file = fileInput.files[0];
+                   // Function to preview the selected image
+                        function previewImage(input) {
+                                 if (input.files && input.files[0]) {
+                                     var reader = new FileReader();
+                                     reader.onload = function(e) {
+                                         $('#thumbnail').attr('src', e.target.result);
+                                     }
+                                     reader.readAsDataURL(input.files[0]); // Convert image to base64 string
+                                 }
+                            }
 
-		var reader = new FileReader();
 
-		reader.onload = function(e) {
-			$('#thumbnail').attr('src', e.target.result);
-		};
 
-		reader.readAsDataURL(file);
-	}
+
+        });
+
+
+
 </script>
 </html>
