@@ -66,14 +66,17 @@
 
 	<script>
 		$(document).ready(function() {
-			$(".deleteLink").each(function() {
-				$(this).on("click", function() {
-					bookId = $(this).attr("id");
-					if (confirm('Are you sure you want to delete the book with ID ' +  bookId + '?')) {
-						window.location = 'delete_book?id=' + bookId;
-					}
-				});
-			});
+			 $(".deleteLink").each(function() {
+                    $(this).on("click", function() {
+                        console.log("Delete link clicked");
+                        var bookId = $(this).attr("id");
+                        console.log("Book ID: " + bookId);
+                        if (confirm('Are you sure you want to delete the book with ID ' + bookId + '?')) {
+                            console.log("Deleting book with ID: " + bookId);
+                            window.location = 'delete_book?id=' + bookId;
+                        }
+                    });
+                });
 		});
 	</script>
 </body>

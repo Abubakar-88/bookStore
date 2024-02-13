@@ -31,7 +31,7 @@ public BookDAO(){
 
     @Override
     public void delete(Object bookId){
-     super.find(Book.class, bookId);
+     super.delete(Book.class, bookId);
 }
 
 @Override

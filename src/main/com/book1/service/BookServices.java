@@ -120,5 +120,47 @@ public class BookServices {
             book.setImage(imageBytes);
         }
     }
+    public void editBook() throws ServletException, IOException {
+        Integer bookId = Integer.parseInt(request.getParameter("id"));
+        Book book = bookDAO.get(bookId);
+        List<Category> listCategory = categoryDAO.listAll();
+
+        request.setAttribute("book", book);
+        request.setAttribute("listCategory", listCategory);
+
+        String editPage = "book_form.jsp";
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage);
+        requestDispatcher.forward(request, response);
+
+    }
+    public void updateBook() throws ServletException, IOException {
+        Integer bookId = Integer.parseInt(request.getParameter("bookId"));
+        String title = request.getParameter("title");
+
+        Book existBook = bookDAO.get(bookId);
+        Book bookByTitle = bookDAO.findByTitle(title);
+
+        if (bookByTitle != null && !existBook.equals(bookByTitle)) {
+            String message = "Could not update book because there's another book having same title.";
+            listBooks(message);
+            return;
+        }
+
+        readBookFields(existBook);
+
+        bookDAO.update(existBook);
+
+        String message = "The book has been updated successfully.";
+        listBooks(message);
+    }
+
+    public void deleteBook() throws ServletException, IOException {
+        Integer bookId = Integer.parseInt(request.getParameter("id"));
+
+        bookDAO.delete(bookId);
+
+        String message = "The book has been deleted successfully.";
+        listBooks(message);
+    }
 
 }
